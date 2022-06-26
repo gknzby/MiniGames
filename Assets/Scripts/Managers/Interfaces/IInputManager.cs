@@ -7,5 +7,6 @@ namespace Gknzby.Managers
         void RemoveDefaultReceiver(IInputReceiver inputReceiver);
         void StopSendingInputs();
         void StartSendingInputs();
+        void CancelSendingInputs();
     }
 }

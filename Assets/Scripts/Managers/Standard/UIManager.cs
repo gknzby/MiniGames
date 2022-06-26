@@ -109,23 +109,19 @@ namespace Gknzby.Managers
         #region Class Functions
         private void ResumeGame()
         {
-            //ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.ResumeGame);
-
-
-            //IGameManager igm = ManagerProvider.GetManager("GameManager") as IGameManager;
-            //igm.SendGameAction(GameAction.ResumeGame);
+            ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.ResumeGame);
 
             this.HideMenu("PauseMenu");
         }
         private void StopGame()
         {
-            //ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.PauseGame);
+            ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.PauseGame);
 
             this.ShowMenu("PauseMenu");
         }
         private void RestartGame()
         {
-            //ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.Restart);
+            ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.Restart);
         }
         private void LoadLevel()
         {
@@ -134,7 +130,7 @@ namespace Gknzby.Managers
                 PlayerPrefs.SetInt("Level", 0);
             }
 
-            //ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.LoadLevel);
+            ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.LoadLevel);
         }
         private void LoadLevel(int index)
         {
