@@ -157,15 +157,15 @@ namespace Gknzby.Managers
 
         private void SendUpdate()
         {
-            ActiveReceiver?.PositionUpdate(Vector2.zero);
+            ActiveReceiver?.PositionUpdate(Input.mousePosition);
         }
         private void SendClick()
         {
-            ActiveReceiver?.Click(Vector2.zero);
+            ActiveReceiver?.Click(Input.mousePosition);
         }
         private void SendRelease()
         {
-            ActiveReceiver?.Release(Vector2.zero);
+            ActiveReceiver?.Release(Input.mousePosition);
         }
         private void SendCancel()
         {

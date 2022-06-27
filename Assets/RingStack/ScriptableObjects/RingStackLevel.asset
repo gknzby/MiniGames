@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062d8df00604cd140b2096c8f0dfd264, type: 3}
+  m_Name: RingStackLevel
+  m_EditorClassIdentifier: 
+  materialDictionary: {fileID: 11400000, guid: 616f507fa67568a42882163780436673, type: 2}
+  holder1:
+    ringDataList:
+    - ringType: 1
+    - ringType: 2
+    - ringType: 2
+  holder2:
+    ringDataList:
+    - ringType: 1
+  holder3:
+    ringDataList:
+    - ringType: 2
