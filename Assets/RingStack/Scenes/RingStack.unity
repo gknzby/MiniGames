@@ -822,9 +822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7303b9be3a0e3f478669bbd9313eb7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelList:
-  - {fileID: 11400000, guid: 664a245915b07ba4f887cacace9fdc06, type: 2}
-  - {fileID: 11400000, guid: 5662b2886ff83c748a055e8a9bcfbcd5, type: 2}
   holder1: {fileID: 583836975}
   holder2: {fileID: 56082077}
   holder3: {fileID: 333896025}
@@ -971,8 +968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca18b4bc0ca7668449b378e05e23a7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringoStacku:
-    LevelCollection: []
+  subGameLevelCollections:
+  - subGame: 1
+    levelCollection: {fileID: 11400000, guid: d1750d882b7a1f84da163b03f573353f, type: 2}
 --- !u!1 &1251992314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,7 +1354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9c0eeceb04a8941abe69c3ac04eba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RingStackGame: {fileID: 115506092}
+  subGameCollection:
+  - subGameData:
+      subGame: 1
+    subGameTransform: {fileID: 115506092}
 --- !u!1001 &1902130347
 PrefabInstance:
   m_ObjectHideFlags: 0

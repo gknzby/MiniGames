@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad73b2aa010b6a4085efddbd7edbfc9, type: 3}
   m_Name: RingStack Level Collection
   m_EditorClassIdentifier: 
-  LevelCollection: []
+  LevelCollection:
+  - {fileID: 11400000, guid: 664a245915b07ba4f887cacace9fdc06, type: 2}
+  - {fileID: 11400000, guid: 5662b2886ff83c748a055e8a9bcfbcd5, type: 2}

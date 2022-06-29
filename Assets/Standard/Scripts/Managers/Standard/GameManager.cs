@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Gknzby.Components;
 
 
 namespace Gknzby.Managers
@@ -39,11 +40,18 @@ namespace Gknzby.Managers
         #endregion
 
         #region Class Functions
+        private string GetActiveLevelPhrase()
+        {
+            string subGamePrefix = ManagerProvider.GetManager<GameSelector>().ActiveSubGameData.Prefix;
+            PhraseGenerator phraseGenerator = new PhraseGenerator(subGamePrefix);
+            phraseGenerator += PostFix.Level;
+            return phraseGenerator.ToString();
+        }
         private void EndGame()
         {
             StopGame();
             ManagerProvider.GetManager<IUIManager>().ShowMenu("EndGameMenu");
-            PlayerPrefs.SetInt("Level", 0);
+            PlayerPrefs.SetInt(GetActiveLevelPhrase(), 0);
         }
 
         private void GameWin()
@@ -81,7 +89,7 @@ namespace Gknzby.Managers
         {
             PlayerPrefs.Save();
 
-            int level = PlayerPrefs.GetInt("Level");
+            int level = PlayerPrefs.GetInt(GetActiveLevelPhrase());
 
             ILevelManager levelManager = ManagerProvider.GetManager<ILevelManager>();
             if (levelManager.LoadLevel(level))

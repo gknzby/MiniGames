@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Gknzby.UI;
 using UnityEngine;
+using Gknzby.Components;
 
 namespace Gknzby.Managers
 {
@@ -125,28 +126,35 @@ namespace Gknzby.Managers
         }
         private void LoadLevel()
         {
-            if (!PlayerPrefs.HasKey("Level"))
+            if (!PlayerPrefs.HasKey(GetActiveLevelPhrase()))
             {
-                PlayerPrefs.SetInt("Level", 0);
+                PlayerPrefs.SetInt(GetActiveLevelPhrase(), 0);
             }
 
             ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.LoadLevel);
         }
         private void LoadLevel(int index)
         {
-            PlayerPrefs.SetInt("Level", index);
+            PlayerPrefs.SetInt(GetActiveLevelPhrase(), index);
 
             LoadLevel();
         }
         private void NextLevel()
         {
-            if (!PlayerPrefs.HasKey("Level"))
+            if (!PlayerPrefs.HasKey(GetActiveLevelPhrase()))
             {
                 Debug.LogWarning("Next level but there is no 'Level' key in PlayerPrefs");
-                PlayerPrefs.SetInt("Level", 0);
+                PlayerPrefs.SetInt(GetActiveLevelPhrase(), 0);
             }
 
-            LoadLevel(PlayerPrefs.GetInt("Level") + 1);
+            LoadLevel(PlayerPrefs.GetInt(GetActiveLevelPhrase()) + 1);
+        }
+        private string GetActiveLevelPhrase()
+        {
+            string subGamePrefix = ManagerProvider.GetManager<GameSelector>().ActiveSubGameData.Prefix;
+            PhraseGenerator phraseGenerator = new PhraseGenerator(subGamePrefix);
+            phraseGenerator += PostFix.Level;
+            return phraseGenerator.ToString();
         }
         #endregion
 
