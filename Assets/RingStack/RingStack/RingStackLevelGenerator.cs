@@ -6,7 +6,7 @@ using Gknzby.Components;
 
 namespace Gknzby.RingStack
 {
-    public class RingStackLevelManager : MonoBehaviour, ILevelGenerator, IEventListener<ILevelData>
+    public class RingStackLevelGenerator : MonoBehaviour, ILevelGenerator, IEventListener<ILevelData>
     {
         private RingStackLevelData levelinData;
         private ILevelData LevelinData { get { return levelinData; } set { levelinData = (RingStackLevelData)value; } }

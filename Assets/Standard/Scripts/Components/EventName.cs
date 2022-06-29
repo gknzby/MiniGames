@@ -8,6 +8,7 @@ namespace Gknzby
     {
         Undefined = 0,
         ScoreChange = 1,
-        LevelChange = 2
+        LevelChange = 2,
+        SubGameChange = 3
     }
 }

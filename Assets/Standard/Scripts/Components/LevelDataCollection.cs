@@ -28,6 +28,7 @@ namespace Gknzby.Components
             }
             else
             {
+                Debug.LogWarning("Level Data couldn't returned");
                 levelData = null;
                 return false;
             }
