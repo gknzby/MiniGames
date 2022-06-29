@@ -93,6 +93,7 @@ namespace Gknzby.RingStack
             if (emptyOne && oneColor)
             {
                 Debug.Log("Win");
+                ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.Win);
             }
             else
             {
