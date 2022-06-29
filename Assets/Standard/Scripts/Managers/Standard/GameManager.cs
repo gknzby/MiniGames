@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Gknzby.Components;
-
+using System;
 
 namespace Gknzby.Managers
 {
@@ -32,6 +32,9 @@ namespace Gknzby.Managers
                     break;
                 case GameAction.ResumeGame:
                     ResumeGame();
+                    break;
+                case GameAction.ExitGame:
+                    ExitGame();
                     break;
                 default:
                     break;
@@ -101,6 +104,16 @@ namespace Gknzby.Managers
                 SendGameAction(GameAction.EndGame);
             }
         }
+        private void ExitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBPLAYER
+         Application.OpenURL(webplayerQuitURL);
+#else
+         Application.Quit();
+#endif
+        }
         #endregion
 
         #region Unity Functions => Awake, Start, OnDestroy
@@ -108,16 +121,12 @@ namespace Gknzby.Managers
         {
             ManagerProvider.AddManager<IGameManager>(this);
         }
-        private void Start()
-        {
-            //Works after all awake functions and start functions
-            StartCoroutine(AfterLoad());
-        }
-        private IEnumerator AfterLoad()
+        private IEnumerator Start()
         {
             yield return null; //Waiting first update functions
-            ManagerProvider.GetManager<IUIManager>().ShowMenu("MainMenu");
+            ManagerProvider.GetManager<IUIManager>().ShowMenu("GameSelectionMenu");
         }
+
         private void OnDestroy()
         {
             ManagerProvider.RemoveManager<IGameManager>();

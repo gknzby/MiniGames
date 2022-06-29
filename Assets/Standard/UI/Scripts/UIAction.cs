@@ -10,6 +10,9 @@ namespace Gknzby.UI
         ResumeGame = 4,
         LoadLevel = 5,
         NextLevel = 6,
-        RetryLevel = 7
+        RetryLevel = 7,
+        SelectSubGame = 8,
+        ExitGame = 9,
+        HideMenu = 10
     }
 }

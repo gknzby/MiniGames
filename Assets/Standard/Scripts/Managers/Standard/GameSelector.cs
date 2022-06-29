@@ -29,14 +29,9 @@ namespace Gknzby.Managers
             }
         }
 
-        private IEnumerator Start()
-        {
-            yield return new WaitForSeconds(2f);
-            _ = SelectGame(SubGame.RingStack);
-        }
-
         public bool SelectGame(SubGame subGame)
         {
+            Debug.Log("Game selected");
             bool anyActiveGame = activeSubGame != null;
             if(anyActiveGame)
             {
@@ -50,6 +45,7 @@ namespace Gknzby.Managers
                 activeSubGame.SetEnableSubGame(true);
 
                 ManagerProvider.GetManager<IEventManager>().InvokeEvent(EventName.SubGameChange, activeSubGame.subGameData);
+                ManagerProvider.GetManager<IUIManager>().ShowMenu("MainMenu");
                 return true;
             }
             else

@@ -8,6 +8,7 @@ namespace Gknzby
         Restart,
         LoadLevel,
         EndGame,
-        ResumeGame
+        ResumeGame,
+        ExitGame
     }
 }

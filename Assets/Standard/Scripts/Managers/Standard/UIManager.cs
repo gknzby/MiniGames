@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using Gknzby.UI;
 using UnityEngine;
 using Gknzby.Components;
+using System;
 
 namespace Gknzby.Managers
 {
     public class UIManager : MonoBehaviour, IUIManager
     {
-        private List<IUIMenu> uiMenus;
+        private List<IUIMenu> uiMenuCollection = new();
+        private List<IUIMenu> activeUIMenuCollection = new();
 
         #region IUIManager
         public void SendUIAction(UIAction uiAction)
@@ -35,9 +37,17 @@ namespace Gknzby.Managers
                 case UIAction.PauseGame:
                     StopGame();
                     break;
+                case UIAction.ExitGame:
+                    ExitGame();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void ExitGame()
+        {
+            ManagerProvider.GetManager<IGameManager>().SendGameAction(GameAction.ExitGame);
         }
 
         public void SendUIComponent(UIComponent uiComponent)
@@ -47,10 +57,15 @@ namespace Gknzby.Managers
                 case UIAction.LoadLevel:
                     int level = int.Parse(uiComponent.value);
                     LoadLevel(level);
-                    HideMenu("LevelsMenu");
                     break;
                 case UIAction.ShowMenu:
                     ShowMenu(uiComponent.value);
+                    break;
+                case UIAction.SelectSubGame:
+                    SelectSubGame(uiComponent.value);
+                    break;
+                case UIAction.HideMenu:
+                    HideMenu(uiComponent.value);
                     break;
                 default:
                     SendUIAction(uiComponent.uiAction);
@@ -60,19 +75,20 @@ namespace Gknzby.Managers
 
         public void RegisterMenu(IUIMenu uiMenu)
         {
-            if (!uiMenus.Contains(uiMenu))
+            if (!uiMenuCollection.Contains(uiMenu))
             {
-                uiMenus.Add(uiMenu);
+                uiMenuCollection.Add(uiMenu);
             }
             uiMenu.HideMenu();
         }
         public void ShowMenu(string menuName)
         {
-            foreach (IUIMenu uiMenu in uiMenus)
+            foreach (IUIMenu uiMenu in uiMenuCollection)
             {
                 if (uiMenu.MenuName == menuName)
                 {
                     uiMenu.ShowMenu();
+                    activeUIMenuCollection.Add(uiMenu);
                     return;
                 }
             }
@@ -81,11 +97,12 @@ namespace Gknzby.Managers
         }
         public void HideMenu(string menuName)
         {
-            foreach (IUIMenu uiMenu in uiMenus)
+            foreach (IUIMenu uiMenu in uiMenuCollection)
             {
                 if (uiMenu.MenuName == menuName)
                 {
                     uiMenu.HideMenu();
+                    activeUIMenuCollection.Remove(uiMenu);
                     return;
                 }
             }
@@ -95,15 +112,26 @@ namespace Gknzby.Managers
 
         public IUIMenu GetMenu(string menuName)
         {
-            foreach (IUIMenu uiMenu in uiMenus)
+            foreach (IUIMenu uiMenu in uiMenuCollection)
             {
                 if (uiMenu.MenuName == menuName)
                 {
                     return uiMenu;
                 }
             }
-
             return null;
+        }
+
+        private void SelectSubGame(string subGameStr)
+        {
+            if(System.Enum.TryParse(subGameStr, out SubGame subGame))
+            {
+                ManagerProvider.GetManager<GameSelector>().SelectGame(subGame);
+            }
+            else
+            {
+                Debug.LogError(subGameStr + " SubGame couldn't found in SubGame(Enum)");
+            }
         }
         #endregion
 
@@ -156,12 +184,20 @@ namespace Gknzby.Managers
             phraseGenerator += PostFix.Level;
             return phraseGenerator.ToString();
         }
+
+        private void HideAllMenus()
+        {
+            foreach (IUIMenu menu in activeUIMenuCollection)
+            {
+                HideMenu(menu.MenuName);
+            }
+        }
         #endregion
 
         #region Unity Functions => Awake, OnDestroy
         private void Awake()
         {
-            uiMenus = new List<IUIMenu>();
+            uiMenuCollection = new List<IUIMenu>();
             ManagerProvider.AddManager<IUIManager>(this);
         }
 
