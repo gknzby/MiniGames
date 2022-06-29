@@ -3,7 +3,11 @@ guid: 062d8df00604cd140b2096c8f0dfd264
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - MaterialCollection: {fileID: 11400000, guid: 616f507fa67568a42882163780436673,
+      type: 2}
+  - RingPrefab: {fileID: 6689563597906910163, guid: d8e8410070205674eb7a6f963603b864,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

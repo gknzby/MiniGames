@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Gknzby.Components
 {
-    public interface IScoreListener
+    public interface IData
     {
-        void HandleScoreChange(ScoreData scoreData);
+
     }
 }

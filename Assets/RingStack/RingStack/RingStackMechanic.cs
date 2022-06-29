@@ -90,7 +90,7 @@ namespace Gknzby.RingStack
                 }
             }
 
-            if(emptyOne && oneColor)
+            if (emptyOne && oneColor)
             {
                 Debug.Log("Win");
             }

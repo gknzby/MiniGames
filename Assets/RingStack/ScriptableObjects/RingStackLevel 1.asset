@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062d8df00604cd140b2096c8f0dfd264, type: 3}
-  m_Name: RingStackLevel
+  m_Name: RingStackLevel 1
   m_EditorClassIdentifier: 
   materialDictionary: {fileID: 11400000, guid: 616f507fa67568a42882163780436673, type: 2}
   holder1:

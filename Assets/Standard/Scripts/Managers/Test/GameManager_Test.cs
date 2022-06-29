@@ -108,6 +108,8 @@ namespace Gknzby.Managers
         {
             yield return null; //Waiting first update functions
             ManagerProvider.GetManager<IInputManager>().StartSendingInputs();
+            yield return new WaitForSeconds(1f);
+            ManagerProvider.GetManager<ILevelManager>().LoadLevel(0);
         }
         private void OnDestroy()
         {

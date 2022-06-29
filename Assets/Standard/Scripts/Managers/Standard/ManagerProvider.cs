@@ -20,6 +20,7 @@ namespace Gknzby.Managers
         private readonly Dictionary<System.Type, IManager> managerDict = new();
 
         public static void AddManager<T>(IManager manager)
+            where T : IManager
         {
             if (Instance.managerDict.ContainsKey(typeof(T)))
             {
@@ -32,11 +33,13 @@ namespace Gknzby.Managers
         }
 
         public static T GetManager<T>()
+            where T : IManager
         {
             return Instance.managerDict.ContainsKey(typeof(T)) ? (T)Instance.managerDict[typeof(T)] : default;
         }
 
         public static void RemoveManager<T>()
+            where T : IManager
         {
             if (Instance.managerDict.ContainsKey(typeof(T)))
             {

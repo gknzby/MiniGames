@@ -6,7 +6,7 @@ namespace Gknzby.RingStack
 {
 
     [CreateAssetMenu(fileName = "RingMaterials", menuName = "Gknzby/Ring Stack/Material Dictionary", order = 2)]
-    public class RingMaterials : ScriptableObject
+    public class RingMaterialCollection : ScriptableObject
     {
         [System.Serializable]
         public class RingMat

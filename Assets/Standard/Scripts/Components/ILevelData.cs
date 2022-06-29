@@ -1,6 +1,6 @@
 namespace Gknzby.Components
 {
-    public interface ILevelData
+    public interface ILevelData : IData
     {
         SubGame WhatIsThis { get; }
     }

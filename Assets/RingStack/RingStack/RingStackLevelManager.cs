@@ -6,15 +6,10 @@ using Gknzby.Components;
 
 namespace Gknzby.RingStack
 {
-    public class RingStackLevelManager : MonoBehaviour, ILevelGenerator
+    public class RingStackLevelManager : MonoBehaviour, ILevelGenerator, IEventListener<ILevelData>
     {
         private RingStackLevelData levelinData;
         private ILevelData LevelinData { get { return levelinData; } set { levelinData = (RingStackLevelData)value; } }
-
-
-        [Header("Level")]
-        [SerializeField] private List<RingStackLevelData> LevelList = new();
-        //[SerializeField] private int currentLevel = 0;
 
         [Header("Holder Transforms")]
         [SerializeField] private RingHolder holder1;
@@ -27,31 +22,19 @@ namespace Gknzby.RingStack
 
         private Dictionary<RingType, Material> materialDictionary;
 
-        //private void Start()
-        //{
-        //    GenerateLevel();
-        //}
-
-        //public void GenerateLevel()
-        //{
-        //    RingStackLevelData levelData = LevelList[currentLevel];
-
-        //    materialDictionary = levelData.materialDictionary.GetMaterialDictionary();
-
-        //    GenerateRingHolder(holder1, levelData.holder1);
-        //    GenerateRingHolder(holder2, levelData.holder2);
-        //    GenerateRingHolder(holder3, levelData.holder3);
-        //}
-
-        private void Start()
+        private void OnEnable()
         {
-            SetLevelData(LevelList[0]);
-            GenerateLevel();
+            ManagerProvider.GetManager<IEventManager>().AddEventListener(Gknzby.EventName.LevelChange, this);
+        }
+
+        private void OnDisable()
+        {
+            ManagerProvider.GetManager<IEventManager>().RemoveEventListener(Gknzby.EventName.LevelChange, this);
         }
 
         public void GenerateLevel()
         {
-            materialDictionary = levelinData.materialDictionary.GetMaterialDictionary();
+            materialDictionary = levelinData.MaterialCollection.GetMaterialDictionary();
 
             GenerateRingHolder(holder1, levelinData.holder1);
             GenerateRingHolder(holder2, levelinData.holder2);
@@ -78,6 +61,17 @@ namespace Gknzby.RingStack
             }
 
             LevelinData = levelData;
+        }
+
+        public void HandleEvent()
+        {
+            return;
+        }
+
+        public void HandleEvent(ILevelData eventArg)
+        {
+            SetLevelData(eventArg);
+            GenerateLevel();
         }
     }
 }
