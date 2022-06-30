@@ -169,9 +169,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 317515879}
-  - {fileID: 646173950}
   - {fileID: 1099277181}
+  - {fileID: 646173950}
+  - {fileID: 317515879}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,7 +239,7 @@ Transform:
   - {fileID: 56082076}
   - {fileID: 333896024}
   m_Father: {fileID: 115506092}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 1099277181}
   - component: {fileID: 1099277182}
   m_Layer: 0
-  m_Name: RingStack
+  m_Name: RingStackMechanic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,7 +672,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 115506092}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1099277182
 MonoBehaviour:
@@ -686,10 +686,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7c4257fa05b5c4c83913d4e9ca201f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RingHolderList:
-  - {fileID: 56082076}
-  - {fileID: 583836974}
-  - {fileID: 333896024}
+  RingPrefab: {fileID: 6689563597906910163, guid: d8e8410070205674eb7a6f963603b864,
+    type: 3}
+  rslg: {fileID: 646173951}
+  LeftRingHolder: {fileID: 583836974}
+  MidRingHolder: {fileID: 56082076}
+  RightRingHolder: {fileID: 333896024}
 --- !u!1 &1251992314
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,39 +13,6 @@ namespace Gknzby.RingStack
 
         private readonly Stack<Ring> Rings = new();
 
-        //private void Start()
-        //{
-        //    //AddRingToStack();
-        //    //AddRingToStack();
-        //    //RemoveRingFromStack();
-        //    //AddRingToStack();
-        //    //AddRingToStack();
-        //    //RemoveRingFromStack();
-        //    //RemoveRingFromStack();
-        //    //AddRingToStack();
-        //    //AddRingToStack();
-        //    //AddRingToStack();
-
-        //    TestCreate();
-        //}
-
-        //[System.Serializable]
-        //public class TestClass
-        //{
-        //    public RingType ringType;
-        //    public Material ringMat;
-        //}
-        //[SerializeField] private List<TestClass> testList = new();
-        //private void TestCreate()
-        //{
-        //    foreach(TestClass test in testList)
-        //    {
-        //        AddRingToStack();
-        //        Rings.Peek().TypeOfRing = test.ringType;
-        //        Rings.Peek().transform.GetComponent<MeshRenderer>().material = test.ringMat;
-        //    }
-        //}
-
         public void AddRingToStack()
         {
             Ring newRing = GameObject.Instantiate(RingPrefab, this.transform).GetComponent<Ring>();
@@ -98,9 +65,11 @@ namespace Gknzby.RingStack
             }
         }
 
-        public void SimulateRingToStack()
+        public void SimulateRingToStack(Transform ringTransform)
         {
-
+            Vector3 newPosition = this.transform.position;
+            newPosition.y = GetNewRingHeight();
+            ringTransform.transform.position = newPosition;
         }
 
         public bool IsStackable(Ring ring)

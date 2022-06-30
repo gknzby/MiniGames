@@ -32,12 +32,7 @@ namespace Gknzby.Managers
         public bool SelectGame(SubGame subGame)
         {
             Debug.Log("Game selected");
-            bool anyActiveGame = activeSubGame != null;
-            if(anyActiveGame)
-            {
-                activeSubGame.SetEnableSubGame(false);
-                activeSubGame = null;
-            }
+            DisableActiveSubGame();
 
             if(TryFindSubGame(subGame, out SubGameTransform subGameTransform))
             {
@@ -55,6 +50,16 @@ namespace Gknzby.Managers
                 return false;
             }
 
+        }
+
+        public void DisableActiveSubGame()
+        {
+            bool anyActiveGame = activeSubGame != null;
+            if (anyActiveGame)
+            {
+                activeSubGame.SetEnableSubGame(false);
+                activeSubGame = null;
+            }
         }
 
         private SubGameTransform FindSubGame(SubGame subGame)

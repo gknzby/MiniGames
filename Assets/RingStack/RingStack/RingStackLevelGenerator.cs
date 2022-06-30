@@ -20,7 +20,7 @@ namespace Gknzby.RingStack
         [Header("Ring Prefab")]
         [SerializeField] private GameObject ringPrefab;
 
-        private Dictionary<RingType, Material> materialDictionary;
+        private Dictionary<RingType, Material> materialCollection;
 
         private void OnEnable()
         {
@@ -29,12 +29,12 @@ namespace Gknzby.RingStack
 
         private void OnDisable()
         {
-            ManagerProvider.GetManager<IEventManager>().RemoveEventListener(Gknzby.EventName.LevelChange, this);
+            ManagerProvider.GetManager<IEventManager>()?.RemoveEventListener(Gknzby.EventName.LevelChange, this);
         }
 
         public void GenerateLevel()
         {
-            materialDictionary = levelinData.MaterialCollection.GetMaterialDictionary();
+            materialCollection = levelinData.MaterialCollection.GetMaterialDictionary();
 
             GenerateRingHolder(holder1, levelinData.holder1);
             GenerateRingHolder(holder2, levelinData.holder2);
@@ -48,9 +48,14 @@ namespace Gknzby.RingStack
             foreach(RingData ringData in holderData.ringDataList)
             {
                 Ring ring = GameObject.Instantiate(ringPrefab).GetComponent<Ring>();
-                ring.SetTypeAndMaterial(ringData.ringType, materialDictionary[ringData.ringType]);
+                ring.SetTypeAndMaterial(ringData.ringType, materialCollection[ringData.ringType]);
                 holder.PushRingToStack(ring);
             }            
+        }
+
+        public Dictionary<RingType, Material> GetMaterialCollection()
+        {
+            return materialCollection;
         }
 
         public void SetLevelData(ILevelData levelData)
