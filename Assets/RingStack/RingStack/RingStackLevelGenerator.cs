@@ -8,8 +8,8 @@ namespace Gknzby.RingStack
 {
     public class RingStackLevelGenerator : MonoBehaviour, ILevelGenerator, IEventListener<ILevelData>
     {
-        private RingStackLevelData levelinData;
-        private ILevelData LevelinData { get { return levelinData; } set { levelinData = (RingStackLevelData)value; } }
+        private RingStackLevelData currentLevelData;
+        public ILevelData CurrentLevelData { get { return currentLevelData; } set { currentLevelData = (RingStackLevelData)value; } }
 
         [Header("Holder Transforms")]
         [SerializeField] private RingHolder holder1;
@@ -34,11 +34,11 @@ namespace Gknzby.RingStack
 
         public void GenerateLevel()
         {
-            materialCollection = levelinData.MaterialCollection.GetMaterialDictionary();
+            materialCollection = currentLevelData.MaterialCollection.GetMaterialDictionary();
 
-            GenerateRingHolder(holder1, levelinData.holder1);
-            GenerateRingHolder(holder2, levelinData.holder2);
-            GenerateRingHolder(holder3, levelinData.holder3);
+            GenerateRingHolder(holder1, currentLevelData.holder1);
+            GenerateRingHolder(holder2, currentLevelData.holder2);
+            GenerateRingHolder(holder3, currentLevelData.holder3);
         }
 
         private void GenerateRingHolder(RingHolder holder, RingHolderData holderData)
@@ -60,12 +60,12 @@ namespace Gknzby.RingStack
 
         public void SetLevelData(ILevelData levelData)
         {
-            if(levelData.WhatIsThis != SubGame.RingStack)
+            if (levelData.subGame != SubGame.RingStack)
             {
                 return;
             }
 
-            LevelinData = levelData;
+            CurrentLevelData = levelData;
         }
 
         public void HandleEvent()

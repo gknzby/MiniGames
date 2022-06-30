@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using Gknzby.Components;
 using UnityEngine;
 
 namespace Gknzby.RingStack
 {
     [CreateAssetMenu(fileName = "RingStackLevel", menuName = "Gknzby/Ring Stack/Level", order = 1)]
-    public class RingStackLevelData : ScriptableObject, Components.ILevelData
+    public class RingStackLevelData : ScriptableObject, ILevelData
     {
-        public SubGame WhatIsThis { get { return gameType; } }
-        private readonly SubGame gameType = SubGame.RingStack;
-
+        public SubGame subGame { get { return SubGame.RingStack; } }
 
 #pragma warning disable UNT0013 // Remove invalid SerializeField attribute
         [Header("Ring Prefab&Material")]

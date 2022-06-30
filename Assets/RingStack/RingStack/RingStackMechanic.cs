@@ -14,6 +14,12 @@ namespace Gknzby.RingStack
         private float sourceScreenPoint;
         private float destinationScreenPoint;
 
+        [SerializeField] private Transform LeftRingHolder;
+        [SerializeField] private Transform MidRingHolder;
+        [SerializeField] private Transform RightRingHolder;
+
+        private CarrierLine carrierLine;
+
 
         [Header("Ring Prefab")]
         [SerializeField] private GameObject RingPrefab;
@@ -46,12 +52,6 @@ namespace Gknzby.RingStack
                 return materialCollection;
             }
         }
-
-        [SerializeField] private Transform LeftRingHolder;
-        [SerializeField] private Transform MidRingHolder;
-        [SerializeField] private Transform RightRingHolder;
-
-        private CarrierLine carrierLine;
 
         #region IInputReceiver
         public void Cancel()
